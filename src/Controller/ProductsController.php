@@ -59,6 +59,7 @@ class ProductsController extends AppController
             $product = $this->Products->patchEntity($product, $this->request->getData());
             if ($this->Products->save($product)) {
                 $this->Flash->success(__('The product has been saved.'));
+                // Update the Product type Stock
                 $this->Products->updateStockByType($product['product_type_id']);
                 return $this->redirect(['action' => 'index']);
             }
@@ -81,10 +82,14 @@ class ProductsController extends AppController
             'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
+            $oldProductType = $product->product_type_id;
             $product = $this->Products->patchEntity($product, $this->request->getData());
             if ($this->Products->save($product)) {
                 $this->Flash->success(__('The product has been saved.'));
+                // Update the New Product type Stock
                 $this->Products->updateStockByType($product['product_type_id']);
+                // Update the Old Product type Stock
+                $this->Products->updateStockByType($oldProductType);
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The product could not be saved. Please, try again.'));
@@ -105,6 +110,7 @@ class ProductsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $product = $this->Products->get($id);
         if ($this->Products->delete($product)) {
+            // Update the New Product type Stock
             $this->Products->updateStockByType($product['product_type_id']);
             $this->Flash->success(__('The product has been deleted.'));
         } else {
