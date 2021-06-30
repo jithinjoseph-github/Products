@@ -37,6 +37,8 @@ class ProductTypesTable extends Table
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
+        $this->addBehavior('StockByType');
+
         $this->hasMany('Products', [
             'foreignKey' => 'product_type_id',
         ]);

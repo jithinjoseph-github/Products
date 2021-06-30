@@ -30,6 +30,7 @@ class StockByTypeBehavior extends Behavior
             ->select(['sum' => $productStock->func()->sum('Products.qty')])
             ->where(['Products.product_type_id' => $product_type])
             ->toArray();
+        $typestock = (int) $typestock[0]['sum'];
         
         // New StockByType Table instance
         $StockByType = (new TableLocator)->get('StockByType');
@@ -40,7 +41,7 @@ class StockByTypeBehavior extends Behavior
         if ($StockByTypeData->count()!=0) {
             // Update the StockByType record with new quantity
             $StockByTypeData->update()
-            ->set(['qty' => $typestock[0]['sum']])
+            ->set(['qty' => $typestock])
             ->where(['product_type_id' => $product_type])
             ->execute();
         } else {
@@ -48,7 +49,7 @@ class StockByTypeBehavior extends Behavior
             $StockByTypeData->insert(['product_type_id', 'qty'])
             ->values([
                 'product_type_id' => $product_type,
-                'qty' => $typestock[0]['sum']
+                'qty' => $typestock
             ])
             ->execute();
         }

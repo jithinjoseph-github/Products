@@ -51,6 +51,8 @@ class ProductTypesController extends AppController
         if ($this->request->is('post')) {
             $productType = $this->ProductTypes->patchEntity($productType, $this->request->getData());
             if ($this->ProductTypes->save($productType)) {
+                // Initialize Product Type Stock
+                $this->ProductTypes->updateStockByType($productType->id);
                 $this->Flash->success(__('The product type has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
