@@ -43,6 +43,7 @@ class ProductTypesTable extends Table
             'foreignKey' => 'product_type_id',
         ]);
         $this->hasMany('StockByType', [
+            'dependent' => true,
             'foreignKey' => 'product_type_id',
         ]);
     }
