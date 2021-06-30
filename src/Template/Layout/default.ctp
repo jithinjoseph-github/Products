@@ -59,7 +59,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <ul class="side-nav">
                 <li class="heading"><?= __('Actions') ?></li>
                 <li><?= $this->Html->link(__('List Product Types'), ['controller' => 'ProductTypes', 'action' => 'index']) ?></li>
-                <li><?= $this->Html->link(__('New Product Type'), ['action' => 'add']) ?></li>
+                <li><?= $this->Html->link(__('New Product Type'), ['controller' => 'ProductTypes', 'action' => 'add']) ?></li>
                 <li><?= $this->Html->link(__('List Products'), ['controller' => 'Products', 'action' => 'index']) ?></li>
                 <li><?= $this->Html->link(__('New Product'), ['controller' => 'Products', 'action' => 'add']) ?></li>
                 <li><?= $this->Html->link(__('List Stock By Type'), ['controller' => 'StockByType', 'action' => 'index']) ?></li>
