@@ -23,8 +23,6 @@
                 <td><?= $this->Number->format($stockByType->qty) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $stockByType->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $stockByType->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $stockByType->id], ['confirm' => __('Are you sure you want to delete # {0}?', $stockByType->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
